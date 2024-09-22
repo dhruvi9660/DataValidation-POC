@@ -1,13 +1,14 @@
 import pandas as pd 
 import snowflake.connector as sf
 from flask import Flask, request
+from flask import *
 
 app=Flask(__name__)
 user="pocValidation"
-password="ValidationPocl"
+password="ValidationPoc1"
 account="YIZMGGL-RAB12198"
 database="DV_POC_DB"
-warehouse="CONPUTE_WH"
+warehouse="COMPUTE_WH"
 schema="DB_POC_ETL"
 role="ACCOUNTADMIN"
 
@@ -28,12 +29,12 @@ def run_query(conn, query):
     except Exception as e:
         print(e)
         cursor.close()
-        return df.to_dict()
+    return df
 
 
 @app.route('/')
 def hello_world():
-    return "Hello World , Welcome to Snowflake API"
+    return render_template('index.html')
 
 
 app.route('/count', methods=['GET','POST'])
@@ -43,13 +44,16 @@ def count():
 
 
 
-@app.route('/duplicate count', methods=['GET','POST'])
+@app.route('/duplicate_count', methods=['GET','POST'])
 def duplicate_count():
     query_to_be_executed = "SELECT * FROM DV_POC_ETL.TEST_RESULT_DUPLICATE;"
-    return run_query(conn, query_to_be_executed)
+    df =  run_query(conn, query_to_be_executed)
+    col_names = [ 'SCHEMA_NAME', 'TABLE_NAME', 'TEST_RESULT', 'DUPLICATE_COUNT', 'PRIMARY_KEY', 'DUPLICATE_SQL', 'INSERT_DT']
+    records = df.to_dict(orient='records')
+    return render_template('index.html', col_names = col_names, records=records)
 
 
-@app.route('/null_ percent', method=['GET','POST'])
+@app.route('/null_percent', methods=['GET','POST'])
 def null_percent():
     query_to_be_executed = "SELECT * FROM DV_POC_ETL.TEST_RESULT_NULL_PERCENT;"
     return run_query(conn, query_to_be_executed)
