@@ -2,12 +2,15 @@ import pandas as pd
 import snowflake.connector as sf
 from flask import Flask, request
 from flask import *
+from flask import *
 
 app=Flask(__name__)
 user="pocValidation"
 password="ValidationPoc1"
+password="ValidationPoc1"
 account="YIZMGGL-RAB12198"
 database="DV_POC_DB"
+warehouse="COMPUTE_WH"
 warehouse="COMPUTE_WH"
 schema="DB_POC_ETL"
 role="ACCOUNTADMIN"
