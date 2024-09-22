@@ -1,13 +1,14 @@
 import pandas as pd 
 import snowflake.connector as sf
 from flask import Flask, request
+from flask import *
 
 app=Flask(__name__)
 user="pocValidation"
-password="ValidationPocl"
+password="ValidationPoc1"
 account="YIZMGGL-RAB12198"
 database="DV_POC_DB"
-warehouse="CONPUTE_WH"
+warehouse="COMPUTE_WH"
 schema="DB_POC_ETL"
 role="ACCOUNTADMIN"
 
@@ -33,7 +34,7 @@ def run_query(conn, query):
 
 @app.route('/')
 def hello_world():
-    return "Hello World , Welcome to Snowflake API"
+    return "Welcome"
 
 
 app.route('/count', methods=['GET','POST'])
@@ -49,7 +50,7 @@ def duplicate_count():
     return run_query(conn, query_to_be_executed)
 
 
-@app.route('/null_ percent', method=['GET','POST'])
+@app.route('/null_ percent', methods=['GET','POST'])
 def null_percent():
     query_to_be_executed = "SELECT * FROM DV_POC_ETL.TEST_RESULT_NULL_PERCENT;"
     return run_query(conn, query_to_be_executed)
