@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+              {% block content %}
+                    <thead>
+                      <tr>
+                        {% for col in col_names %}
+                        <th scope="col" style="font-size: small;">{{col}}</th>
+                        {% endfor %}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for record in records %}
+                      <tr>
+                        <td class="text-lowercase">{{ record.SOURCE_TYPE }}</td>
+                        <td class="text-lowercase">{{ record.SOURCE_SCHEMA_NAME }}</td>
+                        <td class="text-lowercase">{{ record.SOURCE_OBJECT_NAME }}</td>
+                        <td class="text-lowercase">{{ record.TARGET_TYPE }}</td>
+                        <td class="text-lowercase">{{ record.TARGET_SCHEMA_NAME }}</td>
+                        <td class="text-lowercase">{{ record.TARGET_OBJECT_NAME }}</td>
+                        <td class="text-lowercase">{{ record.DUPLICATE_COUNT }}</td>
+                        <td class="text-lowercase">{{ record.TARGET_PRIMARY_KEY }}</td>
+                        <td class="text-lowercase">{{ record.DUPLICATE_SQL }}</td>
+                        <td>{{ record.EXECUTION_DT }}</td>
+                        {% if record.TEST_RESULT=="SUCCESS" %}
+                        <td><span class="badge bg-success">{{ record.TEST_RESULT }}</span></td>
+                        {% else %}
+                        <td><span class="badge bg-danger">{{ record.TEST_RESULT }}</span></td>
+                        {% endif %}
+                      </tr>
+                     {% endfor %}
+                    </tbody>
+              {% endblock content %}   

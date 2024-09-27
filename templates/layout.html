@@ -83,7 +83,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link " href="/count">
+        <a class="nav-link " href="/count_check">
           <i class="bi bi-grid"></i>
           <span>Count Check</span>
         </a>
@@ -96,11 +96,11 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Duplicate Check</h1>
+      <h1>{{title}}</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Duplicate Check</li>
+          <li class="breadcrumb-item"><a href="duplicate_check.html">Home</a></li>
+          <li class="breadcrumb-item active">{{title}}</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -115,32 +115,10 @@
                   <br>
                   <table class="table table-borderless datatable">
                    
-                    <thead>
                       {% block content %}
-                      <tr>
-                        {% for col in col_names %}
-                        <th scope="col" style="font-size: small;">{{col}}</th>
-                        {% endfor %}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% for record in records %}
-                      <tr>
-                        <td class="text-lowercase">{{ record.SCHEMA_NAME }}</td>
-                        <td class="text-lowercase">{{ record.TABLE_NAME }}</td>
-                        {% if record.TEST_RESULT=="SUCCESS" %}
-                        <td><span class="badge bg-success">{{ record.TEST_RESULT }}</span></td>
-                        {% else %}
-                        <td><span class="badge bg-danger">{{ record.TEST_RESULT }}</span></td>
-                        {% endif %}
-                        <td>{{ record.DUPLICATE_COUNT }}</td>
-                        <td class="text-lowercase">{{ record.PRIMARY_KEY }}</td>
-                        <td class="text-lowercase">{{ record.DUPLICATE_SQL }}</td>
-                        <td>{{ record.INSERT_DT }}</td>
-                      </tr>
-                     {% endfor %}
+                     
                      {% endblock content %}
-                    </tbody>
+                    
                   </table>
                 </div>
               </div>

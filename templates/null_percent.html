@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+              {% block content %}
+                    <thead>
+                      <tr>
+                        {% for col in col_names %}
+                        <th scope="col" style="font-size: small;">{{col}}</th>
+                        {% endfor %}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for record in records %}
+                      <tr>
+                        <td class="text-lowercase">{{ record.SOURCE_TYPE }}</td>
+                        <td class="text-lowercase">{{ record.SOURCE_SCHEMA_NAME }}</td>
+                        <td class="text-lowercase">{{ record.SOURCE_OBJECT_NAME }}</td>
+                        <td class="text-lowercase">{{ record.TARGET_TYPE }}</td>
+                        <td class="text-lowercase">{{ record.TARGET_SCHEMA_NAME }}</td>
+                        <td class="text-lowercase">{{ record.TARGET_OBJECT_NAME }}</td>
+                        <td class="text-lowercase">{{ record.COLUMN_NAME }}</td>
+                        <td class="text-lowercase">{{ record.NULL_COUNT }}</td>
+                        <td class="text-lowercase">{{ record.NOT_NULL_COUNT }}</td>
+                        <td class="text-lowercase">{{ record.TOTAL_COUNT }}</td>
+                        <td class="text-lowercase">{{ record.NULL_PERCENT }}</td>
+                        <td>{{ record.EXECUTION_DT }}</td>
+                        {% if record.TEST_RESULT=="SUCCESS" %}
+                        <td><span class="badge bg-success">{{ record.TEST_RESULT }}</span></td>
+                        {% else %}
+                        <td><span class="badge bg-danger">{{ record.TEST_RESULT }}</span></td>
+                        {% endif %}
+                      </tr>
+                     {% endfor %}
+                    </tbody>
+              {% endblock content %}   
